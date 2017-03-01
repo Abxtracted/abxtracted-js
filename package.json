@@ -1,0 +1,11 @@
+{
+  "name": "abxtracted",
+  "version": "0.0.1",
+  "description": "Abxtracted javascript client",
+  "main": "abxtracted.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lucas Merencia <lucas.merencia@gmail.com>",
+  "license": "ISC"
+}
