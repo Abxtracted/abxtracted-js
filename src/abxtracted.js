@@ -1,64 +1,46 @@
 'use strict';
 
-(function (root) {
-  var $private = {
-    baseUrl: 'http://localhost:8080/'
-  };
-  var $public = {};
+(function(root){
+  var _baseUrl = "https://app.abxtracted.com";
+  var Abx = {}
+  root.Abx = Abx;
 
-  $private.httpGet = function(url, callback){
+  Abx.Experiment = function(projectId, experimentKey, baseUrl){
+    this.projectId = projectId;
+    this.experimentKey = experimentKey;
+    this.baseUrl = baseUrl || _baseUrl;
+  };
+
+  Abx.Experiment.prototype.getVersion = function(userIdentity, callback){
+    var url = this.baseUrl + "/public/project/" + this.projectId +
+    "/customer/" + userIdentity +"/experiment/" + this.experimentKey;
+    return httpGet(url, callback);
+  };
+
+  Abx.Experiment.prototype.complete = function(userIdentity, callback){
+    var url = this.baseUrl + "/public/project/" + this.projectId +
+    "/customer/" + userIdentity +"/experiment/" + this.experimentKey
+    + "/check/complete";
+    return httpGet(url, callback);
+  };
+
+  function httpGet(url, callback){
     var xhr = new XMLHttpRequest();
-    var isAsync = typeof callback == 'function';
+    console.log(url, callback)
     xhr.onload = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              if (isAsync){
-                var responseBody = undefined;
-                if(xhr.responseText)
-                  responseBody = JSON.parse(xhr.responseText);
-                callback(responseBody);
-              }
-            } else {
-                console.error(xhr.statusText);
-            }
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          if(xhr.responseText && typeof callback == 'function')
+            callback(JSON.parse(xhr.responseText));
+          else
+            callback(xhr);
+        } else {
+          console.error(xhr.statusText);
         }
-    };
-    xhr.open("GET", url, isAsync);
+      }
+    }
+    xhr.open("GET", url, true);
     xhr.send(null);
-
-    if(!isAsync){
-      var responseBody = undefined;
-      if(xhr.responseText)
-        responseBody = JSON.parse(xhr.responseText);
-      return responseBody;
-    }
   }
 
-  $public.initialize = function(projectId){
-    $private.projectId = projectId;
-  }
-
-  $private.validate = function(){
-    if(!$private.projectId){
-      throw "Abxtracted not initialized, please call abxtracted.initialize(projectId)";
-    }
-  }
-
-  $public.getScenario = function(experimentKey, userIdentity, callback){
-    $private.validate();
-    var url = $private.baseUrl + "public/project/" + $private.projectId +
-      "/customer/" + userIdentity +"/experiment/" + experimentKey;
-    return $private.httpGet(url, callback);
-  }
-
-  $public.complete = function(experimentKey, userIdentity, callback){
-    $private.validate();
-    var url = $private.baseUrl + "public/project/" + $private.projectId +
-      "/customer/" + userIdentity +"/experiment/" + experimentKey
-      + "/check/complete";
-    return $private.httpGet(url, callback);
-  };
-
-  root.abxtracted = $public;
 })(this);
-

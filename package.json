@@ -4,8 +4,14 @@
   "description": "Abxtracted javascript client",
   "main": "abxtracted.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "gulp build"
   },
   "author": "Lucas Merencia <lucas.merencia@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^2.1.0"
+  }
 }
