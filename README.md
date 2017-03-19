@@ -10,7 +10,7 @@ Simple js lib to use abxtracted in browser
 ```
 
 2 - Obtain the user scenario
-```javscript
+```javascript
 var myExperiment = new Abx.Experiment('6c4974f0-0b5a-4585-a227-b1bed8c24e02', 'my_experiment');
 var userScenario = myExperiment.getScenario('my-user-identity', function(scenario){
   /*  
@@ -33,7 +33,7 @@ The response will be something like this:
 **Note**: There are two options for a scenario, control or variation
 
 3 - Inform when a user completes the experiment
-```javscript
+```javascript
 var myExperiment = new Abx.Experiment('6c4974f0-0b5a-4585-a227-b1bed8c24e02', 'my_experiment');
 myExperiment.complete('my-user-identity');
 ```
