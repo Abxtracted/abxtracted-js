@@ -9,7 +9,7 @@ module.exports = (function(){
           if(xhr.responseText && typeof callback == 'function')
             callback(JSON.parse(xhr.responseText));
           else
-            callback(xhr);
+            callback();
         } else {
           console.error(xhr.statusText);
         }
