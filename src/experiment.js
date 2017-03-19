@@ -9,7 +9,7 @@ module.exports = (function(){
     this.experimentKey = experimentKey;
   };
 
-  Experiment.prototype.getVersion = function(userIdentity, callback){
+  Experiment.prototype.getScenario = function(userIdentity, callback){
     const url = baseUrl + "/public/project/" + this.projectId +
     "/customer/" + userIdentity +"/experiment/" + this.experimentKey;
     request.get(url, callback);
