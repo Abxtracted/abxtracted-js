@@ -12,7 +12,9 @@ module.exports = (function(){
   Experiment.prototype.getScenario = function(userIdentity, callback){
     const url = baseUrl + "/public/project/" + this.projectId +
     "/customer/" + userIdentity +"/experiment/" + this.experimentKey;
-    request.get(url, callback);
+    request.get(url, function(result){
+      callback(result.scenario);
+    });
   };
 
   Experiment.prototype.complete = function(userIdentity, callback){
