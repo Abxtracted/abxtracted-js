@@ -1,6 +1,6 @@
 {
   "name": "abxtracted",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Abxtracted javascript client",
   "main": "dist/abxtracted.min.js",
   "scripts": {
@@ -9,6 +9,7 @@
   "author": "Lucas Merencia <lucas.merencia@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "gulp": "^3.9.1",
     "gulp-replace": "^0.5.4",
     "webpack": "^2.2.1",
     "webpack-stream": "^3.2.0"
