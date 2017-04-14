@@ -34,9 +34,9 @@ myExperiment.getScenario('my-user-identity', function(response){
 });
 ```
 
-1.1 The user identity may be an e-mail, an unique id or any unique information that identifies the user in your application.
+1.1 - The user identity may be an e-mail, an unique id or any unique information that identifies the user in your application.
 
-1.2 The response you will get in successCallback is something like this:
+1.2 - The response you will get in successCallback is something like this:
 ```json
 {
   "customerIdentity": "my-user-identity",
