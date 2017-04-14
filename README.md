@@ -2,38 +2,57 @@
 
 Simple js lib to use abxtracted in browser
 
-## Usage
+## Installation
 
-1 - Add the following script in your html page:
+1 - Install abxtracted via NPM
+``` shell
+npm i abxtracted --save
+```
+2 - Insert the abxtracted dist file in your `index.html`
 ``` html
-<script src="http://abxtracted.com/public/abxtracted.min.js"></script>
+<script src="/node_modules/abxtracted/dist/abxtracted.min.js"></script>
 ```
 
-2 - Obtain the user scenario
+## Usage
+
+1 - Obtain the user scenario:
 ```javascript
+/*
+** Abx.Experiment(projectId, experimentKey)
+** @projectId: String
+** @experimentKey: String
+*/
 var myExperiment = new Abx.Experiment('6c4974f0-0b5a-4585-a227-b1bed8c24e02', 'my_experiment');
-var userScenario = myExperiment.getScenario('my-user-identity', function(scenario){
-  /*  
-   * The scenario will be 'control' or 'variation'
-   * Do your stuff based on scenario :)
-   */
+
+/*
+** experiment.getScenario(userIdentity, successCallback)
+** @userIdentity: String
+** @successCallback: Function
+*/
+myExperiment.getScenario('my-user-identity', function(response){
+  var userScenario = response.scenario; // The scenario will be 'control' or 'variation'
 });
 ```
 
-The user identity may be an e-mail, an unique id or any unique information that identify the user in your application.
+1.1 The user identity may be an e-mail, an unique id or any unique information that identifies the user in your application.
 
-The response will be something like this:
+1.2 The response you will get in successCallback is something like this:
 ```json
 {
   "customerIdentity": "my-user-identity",
   "experiment": "my_experiment",
-  "scenario": "control" 
+  "scenario": "control"
 }
 ```
-**Note**: There are two options for a scenario, control or variation
+**Note**: There are two options for a scenario, *control* or *variation*
 
-3 - Inform when a user completes the experiment
+2 - Inform when the user completes the experiment:
 ```javascript
-var myExperiment = new Abx.Experiment('6c4974f0-0b5a-4585-a227-b1bed8c24e02', 'my_experiment');
+/*
+** experiment.complete(userIdentity)
+** @userIdentity: String
+*/
 myExperiment.complete('my-user-identity');
 ```
+
+3 - That's all.
