@@ -3,6 +3,6 @@
     "url": "http://localhost:8080"
   },
   "production": {
-    "url": "https://api.abxtracted.com"
+    "url": "http://api.abxtracted.com"
   }
  }
