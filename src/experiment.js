@@ -13,7 +13,9 @@ module.exports = (function(){
     const url = baseUrl + "/public/project/" + this.projectId +
     "/customer/" + userIdentity +"/experiment/" + this.experimentKey;
     request.get(url, function(result){
-      callback(result.scenario);
+      if(typeof callback === 'function'){
+        callback(result.scenario);
+      }
     });
   };
 

@@ -1,6 +1,6 @@
 {
   "name": "abxtracted",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Abxtracted javascript client",
   "main": "dist/abxtracted.min.js",
   "scripts": {
