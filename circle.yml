@@ -4,4 +4,4 @@ machine:
 
 test:
   override:
-    - npm install && npm test
+    - npm test
