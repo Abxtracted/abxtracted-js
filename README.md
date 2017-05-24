@@ -1,6 +1,8 @@
 # abxtracted-js
 
 [![CircleCI](https://circleci.com/gh/Abxtracted/abxtracted-js.svg?style=svg)](https://circleci.com/gh/Abxtracted/abxtracted-js)
+[![Test Coverage](https://codeclimate.com/github/Abxtracted/abxtracted-js/badges/coverage.svg)](https://codeclimate.com/github/Abxtracted/abxtracted-js/coverage)
+[![Code Climate](https://codeclimate.com/github/Abxtracted/abxtracted-js/badges/gpa.svg)](https://codeclimate.com/github/Abxtracted/abxtracted-js)
 
 ## Usage
 
