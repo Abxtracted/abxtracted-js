@@ -1,9 +1,9 @@
-const gulp = require('gulp');
-const replace = require('gulp-replace');
-const webpackStream = require('webpack-stream');
-const webpack = require('webpack');
-const webpackConfig = require('./webpack.config.js');
-const config = require('./config');
+var gulp = require('gulp');
+var replace = require('gulp-replace');
+var webpackStream = require('webpack-stream');
+var webpack = require('webpack');
+var webpackConfig = require('./webpack.config.js');
+var config = require('./config');
 
 gulp.task('webpack', function() {
   return gulp.src('./**/*.js')
@@ -13,8 +13,8 @@ gulp.task('webpack', function() {
 });
 
 function replaceUrl(){
-  let env = process.env.NODE_ENV || 'development';
-  let envConfig = config[env];
+  var env = process.env.NODE_ENV || 'development';
+  var envConfig = config[env];
   return replace('${ABX_URL}', envConfig.url);
 }
 
