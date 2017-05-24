@@ -4,13 +4,20 @@
   "description": "Abxtracted javascript client",
   "main": "dist/abxtracted.min.js",
   "scripts": {
-    "prepublish": "NODE_ENV=production gulp"
+    "prepublish": "NODE_ENV=production gulp",
+    "test": "nyc --reporter=html --reporter=text ./node_modules/.bin/mocha"
   },
   "author": "Lucas Merencia <lucas.merencia@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-spies": "^0.7.1",
     "gulp": "^3.9.1",
     "gulp-replace": "^0.5.4",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.1",
+    "nyc": "^10.3.2",
+    "sinon": "^2.3.1",
     "webpack": "^2.2.1",
     "webpack-stream": "^3.2.0"
   }

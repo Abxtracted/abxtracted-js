@@ -67,3 +67,4 @@ typings/
 
 dist/
 index.html
+coverage/

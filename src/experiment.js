@@ -1,26 +1,22 @@
 'use strict';
 
-const request = require('./request');
-const baseUrl = require('./const').url;
+var request = require('./request');
+var baseUrl = require('./const').url;
 
 module.exports = (function(){
-  const Experiment = function(projectId, experimentKey){
+  var Experiment = function(projectId, experimentKey){
     this.projectId = projectId;
     this.experimentKey = experimentKey;
   };
 
   Experiment.prototype.getScenario = function(userIdentity, callback){
-    const url = baseUrl + "/public/project/" + this.projectId +
+    var url = baseUrl + "/public/project/" + this.projectId +
     "/customer/" + userIdentity +"/experiment/" + this.experimentKey;
-    request.get(url, function(result){
-      if(typeof callback === 'function'){
-        callback(result.scenario);
-      }
-    });
+    request.get(url, callback);
   };
 
   Experiment.prototype.complete = function(userIdentity, callback){
-    const url = baseUrl + "/public/project/" + this.projectId +
+    var url = baseUrl + "/public/project/" + this.projectId +
     "/customer/" + userIdentity +"/experiment/" + this.experimentKey
     + "/check/complete";
     request.get(url, callback);
