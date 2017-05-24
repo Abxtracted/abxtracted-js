@@ -1,6 +1,6 @@
 'use strict';
 
-const Experiment = require('./experiment');
+var Experiment = require('./experiment');
 
 module.exports = (function(root){
   return {
