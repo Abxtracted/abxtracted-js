@@ -2,8 +2,6 @@
 
 var Experiment = require('./experiment');
 
-module.exports = (function(root){
-  return {
-    Experiment: Experiment
-  }
-})();
+module.exports = {
+  Experiment: Experiment
+};
