@@ -52,6 +52,16 @@ describe('Http', function(){
     expect(mockParams.success.firstCall.args[0].scenario).to.equal('variation');
   });
 
+  it('should call success callback even if server returns blank response', function(){
+    var xhr = http.get(MOCK_URL, mockParams);
+    xhr.readyState = 4;
+    xhr.status = 200;
+    xhr.responseText = '';
+    xhr.onload();
+
+    expect(mockParams.success.firstCall.args[0]).to.equal('');
+  });
+
   it('should not call success callback on get success if success callback is not given', function(){
     delete mockParams.success;
     var xhr = http.get(MOCK_URL, mockParams);

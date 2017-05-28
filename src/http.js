@@ -10,8 +10,8 @@ _public.get = function(url, params){
   xhr.onload = function() {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
-        if(xhr.responseText && typeof success === 'function')
-          _public.complete(JSON.parse(xhr.responseText), success);
+        if(typeof success === 'function')
+          _public.complete(parseResponse(xhr.responseText), success);
       } else if(typeof error === 'function') {
         _public.complete(xhr.statusText, error);
       }
@@ -27,5 +27,15 @@ _public.get = function(url, params){
 _public.complete = function(response, callback){
   callback(response);
 };
+
+function parseResponse(responseText){
+  var response;
+  try {
+    response = JSON.parse(responseText);
+  } catch(err) {
+    response = '';
+  }
+  return response;
+}
 
 module.exports = _public;
