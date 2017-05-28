@@ -1,6 +1,6 @@
 {
   "name": "abxtracted",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Abxtracted javascript client",
   "main": "dist/abxtracted.min.js",
   "scripts": {
@@ -8,6 +8,9 @@
     "test": "nyc --reporter=html --reporter=text --reporter=lcov ./node_modules/.bin/mocha ./test"
   },
   "author": "Lucas Merencia <lucas.merencia@gmail.com>",
+  "contributors": [
+    "Rafael Camargo <hello@rafaelcamargo.com>"
+  ],
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
