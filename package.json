@@ -5,13 +5,12 @@
   "main": "dist/abxtracted.min.js",
   "scripts": {
     "prepublish": "NODE_ENV=production gulp",
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov ./node_modules/.bin/mocha"
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov ./node_modules/.bin/mocha ./test"
   },
   "author": "Lucas Merencia <lucas.merencia@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
-    "chai-spies": "^0.7.1",
     "gulp": "^3.9.1",
     "gulp-replace": "^0.5.4",
     "istanbul": "^0.4.5",
@@ -20,5 +19,9 @@
     "sinon": "^2.3.1",
     "webpack": "^2.2.1",
     "webpack-stream": "^3.2.0"
+  },
+  "dependencies": {
+    "gcookie": "^0.1.3",
+    "uuid": "^3.0.1"
   }
 }
