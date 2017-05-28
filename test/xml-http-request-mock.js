@@ -1,7 +1,8 @@
-var XMLHttpRequestMock = function(){
-  this.onload = function(){};
-  this.open = function(){};
-  this.send = function(){};
-};
+'use strict';
 
-global.XMLHttpRequest = XMLHttpRequestMock;
+var XMLHttpRequestMock = function(){};
+XMLHttpRequestMock.prototype.onload = function(){};
+XMLHttpRequestMock.prototype.open = function(){};
+XMLHttpRequestMock.prototype.send = function(){};
+
+module.exports = XMLHttpRequestMock;

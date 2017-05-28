@@ -1,26 +1,49 @@
 'use strict';
 
-var request = require('./request');
-var baseUrl = require('./const').url;
+var BASE_URL = require('./constants').url;
+var customer = require('./customer');
+var endpoint = require('./endpoint');
+var http = require('./http');
 
-module.exports = (function(){
-  var Experiment = function(projectId, experimentKey){
-    this.projectId = projectId;
-    this.experimentKey = experimentKey;
-  };
+var Experiment = function(projectId, experimentKey){
+  this.projectId = projectId;
+  this.experimentKey = experimentKey;
+};
 
-  Experiment.prototype.getScenario = function(userIdentity, callback){
-    var url = baseUrl + "/public/project/" + this.projectId +
-    "/customer/" + userIdentity +"/experiment/" + this.experimentKey;
-    request.get(url, callback);
-  };
+Experiment.prototype.getScenario = function(params){
+  request.call(this, 'scenario', customer.buildId, params);
+};
 
-  Experiment.prototype.complete = function(userIdentity, callback){
-    var url = baseUrl + "/public/project/" + this.projectId +
-    "/customer/" + userIdentity +"/experiment/" + this.experimentKey
-    + "/check/complete";
-    request.get(url, callback);
-  };
+Experiment.prototype.complete = function(params){
+  request.call(this, 'complete', customer.lookForId, params);
+};
 
-  return Experiment;
-})();
+Experiment.prototype.throwCustomerIdentificationError = function(errorCallback){
+  var message = 'Abxtracted was not able to identify customer: ' +
+                'Cookies unavailable';
+  errorCallback(message);
+};
+
+function request(type, customerAction, params){
+  var url;
+  var errorCallback = getErrorCallback(params);
+  var customerId = params.customerId || customerAction();
+  if(customerId){
+    url = buildRequestUrl(type, customerId, this.projectId, this.experimentKey);
+    http.get(url, params);
+  } else if(errorCallback) {
+    this.throwCustomerIdentificationError(errorCallback);
+  }
+}
+
+function buildRequestUrl(type, customerId, projectId, experimentKey){
+  if(type === 'scenario')
+    return endpoint.buildGetScenarioUrl(customerId, projectId, experimentKey);
+  return endpoint.buildCompleteUrl(customerId, projectId, experimentKey);
+}
+
+function getErrorCallback(params){
+  return params.error;
+}
+
+module.exports = Experiment;
