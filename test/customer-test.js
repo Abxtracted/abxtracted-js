@@ -34,6 +34,7 @@ describe('Customer', function(){
     var id = customer.buildId();
     expect(stubGCookieSet.firstCall.args[0]).to.equal(CUSTOMER_ID_COOKIE_KEY);
     expect(stubGCookieSet.firstCall.args[1]).to.equal('123');
+    expect(stubGCookieSet.firstCall.args[2]).to.equal(365);
   });
 
   it('should build customer id', function(){

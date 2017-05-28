@@ -17,7 +17,7 @@ _public.lookForId = function(){
 };
 
 function setCustomerIdCookie(id){
-  gcookie.set(CUSTOMER_ID_COOKIE_KEY, id);
+  gcookie.set(CUSTOMER_ID_COOKIE_KEY, id, 365);
 }
 
 function getCustomerIdCookie(){
