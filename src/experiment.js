@@ -11,21 +11,11 @@ var Experiment = function(projectId, experimentKey){
 };
 
 Experiment.prototype.getScenario = function(params){
-  var errorCallback = getErrorCallback(params);
-  var customerId = params.customerId || customer.buildId();
-  if(customerId)
-    request('scenario', customerId, this.projectId, this.experimentKey, params);
-  else if(errorCallback)
-    this.throwCustomerIdentificationError(errorCallback);
+  request.call(this, 'scenario', customer.buildId, params);
 };
 
 Experiment.prototype.complete = function(params){
-  var errorCallback = getErrorCallback(params);
-  var customerId = params.customerId || customer.lookForId();
-  if(customerId)
-    request('complete', customerId, this.projectId, this.experimentKey, params);
-  else if(errorCallback)
-    this.throwCustomerIdentificationError(errorCallback);
+  request.call(this, 'complete', customer.lookForId, params);
 };
 
 Experiment.prototype.throwCustomerIdentificationError = function(errorCallback){
@@ -34,9 +24,16 @@ Experiment.prototype.throwCustomerIdentificationError = function(errorCallback){
   errorCallback(message);
 };
 
-function request(type, customerId, projectId, experimentKey, params){
-  var url = buildRequestUrl(type, customerId, projectId, experimentKey);
-  http.get(url, params);
+function request(type, customerAction, params){
+  var url;
+  var errorCallback = getErrorCallback(params);
+  var customerId = params.customerId || customerAction();
+  if(customerId){
+    url = buildRequestUrl(type, customerId, this.projectId, this.experimentKey);
+    http.get(url, params);
+  } else if(errorCallback) {
+    this.throwCustomerIdentificationError(errorCallback);
+  }
 }
 
 function buildRequestUrl(type, customerId, projectId, experimentKey){

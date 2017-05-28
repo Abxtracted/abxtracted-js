@@ -11,26 +11,17 @@ var EXPERIMENT_COMPLETE_ENDPOINT =  BASE_EXPERIMENT_ENDPOINT +
 var _public = {};
 
 _public.buildGetScenarioUrl = function(customerId, projectId, experimentKey){
-  return buildExperimentUrl(BASE_EXPERIMENT_ENDPOINT, {
-    customerId: customerId,
-    projectId: projectId,
-    experimentKey: experimentKey
-  });
+  return buildExperimentUrl(BASE_EXPERIMENT_ENDPOINT, customerId, projectId, experimentKey);
 };
 
 _public.buildCompleteUrl = function(customerId, projectId, experimentKey){
-  return buildExperimentUrl(EXPERIMENT_COMPLETE_ENDPOINT, {
-    customerId: customerId,
-    projectId: projectId,
-    experimentKey: experimentKey
-  });
+  return buildExperimentUrl(EXPERIMENT_COMPLETE_ENDPOINT, customerId, projectId, experimentKey);
 };
 
-function buildExperimentUrl(endpoint, params){
-  var url = endpoint;
-  for(var param in params)
-    url = url.replace('{' + param + '}', params[param]);
-  return url;
+function buildExperimentUrl(endpoint, customerId, projectId, experimentKey){
+  return  endpoint.replace('{customerId}', customerId)
+                  .replace('{projectId}', projectId)
+                  .replace('{experimentKey}', experimentKey);
 }
 
 module.exports = _public;
