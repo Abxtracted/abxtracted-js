@@ -27,13 +27,19 @@ Experiment.prototype.throwCustomerIdentificationError = function(errorCallback){
 function request(type, customerAction, params){
   var url;
   var errorCallback = getErrorCallback(params);
-  var customerId = params.customerId || customerAction();
+  var customerId = getCustomerId(params, customerAction);
   if(customerId){
     url = buildRequestUrl(type, customerId, this.projectId, this.experimentKey);
     http.get(url, params);
   } else if(errorCallback) {
     this.throwCustomerIdentificationError(errorCallback);
   }
+}
+
+function getCustomerId(params, customerAction){
+  if(params && params.customerId)
+    return params.customerId;
+  return customerAction();
 }
 
 function buildRequestUrl(type, customerId, projectId, experimentKey){
@@ -43,7 +49,7 @@ function buildRequestUrl(type, customerId, projectId, experimentKey){
 }
 
 function getErrorCallback(params){
-  return params.error;
+  return params ? params.error : null;
 }
 
 module.exports = Experiment;

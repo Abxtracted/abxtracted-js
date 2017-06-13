@@ -89,7 +89,7 @@ describe('Experiment', function() {
     expect(mockParams.error.firstCall.args[0]).to.equal(COOKIES_UNAVAILABLE_MESSAGE);
   });
 
-  it('should not call error on get scenario when build customer id was not possible and error callback was not given', function(){
+  it('should not call error on get scenario when build customer id has not been possible and error callback was not given', function(){
     stubCustomerBuildId.returns(null);
     var experiment = instantiateExperiment();
     delete mockParams.error;
@@ -135,6 +135,14 @@ describe('Experiment', function() {
     delete mockParams.error;
     experiment.throwCustomerIdentificationError = sinon.spy();
     experiment.complete(mockParams);
+    expect(experiment.throwCustomerIdentificationError.called).to.equal(false);
+  });
+
+  it('should not call error on experiment completation if params was not given', () => {
+    stubCustomerBuildId.returns(null);
+    var experiment = instantiateExperiment();
+    experiment.throwCustomerIdentificationError = sinon.spy();
+    experiment.complete();
     expect(experiment.throwCustomerIdentificationError.called).to.equal(false);
   });
 

@@ -101,4 +101,13 @@ describe('Http', function(){
     expect(spyHttpComplete.called).to.equal(false);
   });
 
+  it('should not call any callback on get complete if params is not given', function(){
+    var xhr = http.get(MOCK_URL);
+    xhr.readyState = 4;
+    xhr.status = 200;
+    xhr.onload();
+
+    expect(spyHttpComplete.called).to.equal(false);
+  });
+
 });
