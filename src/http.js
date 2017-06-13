@@ -4,8 +4,8 @@ var _public = {};
 
 _public.get = function(url, params){
   var xhr = new XMLHttpRequest();
-  var success = params.success;
-  var error = params.error;
+  var success = getRequestCallback(params, 'success');
+  var error = getRequestCallback(params, 'error');
 
   xhr.onload = function() {
     if (xhr.readyState === 4) {
@@ -27,6 +27,10 @@ _public.get = function(url, params){
 _public.complete = function(response, callback){
   callback(response);
 };
+
+function getRequestCallback(params, callbackType){
+  return params ? params[callbackType] : null;
+}
 
 function parseResponse(responseText){
   var response;
